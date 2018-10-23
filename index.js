@@ -68,3 +68,27 @@ function validateSudoku(board) {
 }
 
 // trigger validate sudoku through an event handler on the UI
+
+function createBoard() {
+  board.forEach(function(row, j) {
+    const rowGroup = document.createElement('div');
+    rowGroup.classList.add('row');
+    if (j !== 0 && j % 3 === 0) {
+      rowGroup.classList.add('top-edge');
+    }
+
+    row.forEach(function(col, i) {
+      const cell = document.createElement('span');
+      cell.classList.add('cell');
+      cell.innerText = col;
+      rowGroup.appendChild(cell);
+
+      if (i !== 0 && i % 3 === 0) {
+        cell.classList.add('edge');
+      }
+    });
+    sudoku_board.appendChild(rowGroup);
+  });
+}
+
+createBoard();

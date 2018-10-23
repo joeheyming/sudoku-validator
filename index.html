@@ -5,12 +5,39 @@
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+     .cell {
+       border: solid 1px gray;
+       padding: 4px 8px;
+       display: inline-block;
+     }
+     .cell:hover {
+       background-color: black;
+       color: white;
+       cursor: pointer;
+     }
+
+     .cell:nth-child(3n):not(:last-child) {
+       border-right: solid 2px black;
+     }
+     .row:nth-child(3n):not(:last-child) {
+       border-bottom: solid 2px black;
+     }
+
+     .row {
+       display: table;
+     }
+
+    </style>
 </head>
-<body>
-    <div id="sudoku_board">
-        <!-- Build a 9x9 sudoku grid -->
-        <button>Validate</button>
-    </div>
-    <script src="index.js"></script>
+<body> 
+  <button>Validate</button>
+  <br />
+  <br />
+  
+  <div id="sudoku_board">
+    <!-- Build a 9x9 sudoku grid -->
+  </div>
+  <script src="index.js"></script>
 </body>
 </html>
