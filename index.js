@@ -79,6 +79,42 @@ function createBoard() {
 
     row.forEach(function(col, i) {
       const cell = document.createElement('span');
+      cell.data = col;
+      cell.onclick = function() {
+        const val = document.createElement('input');
+        val.value = cell.innerText;
+        cell.innerText = null;
+        cell.appendChild(val);
+        val.focus();
+        function done() {
+          const value = val.value;
+          val.onblur = null;
+          cell.removeChild(cell.firstChild);
+          cell.innerText = value;
+          cell.data = value;
+        }
+        val.onblur = done;
+        val.onkeydown = function(event) {
+          const digit = String.fromCharCode(event.which).match(/[1-9]/);
+          if (digit || event.which === 13 || event.which === 27) {
+            return;
+          }
+          event.preventDefault();
+        }
+        val.onkeyup = function(event) {
+          const digit = String.fromCharCode(event.which).match(/[1-9]/);
+          if (digit) {
+            val.value = digit;
+          } else if (event.which === 13) { // enter
+            done();
+          } else if (event.which === 27) { // escape
+            val.onblur = null;
+            cell.removeChild(cell.firstChild);
+            cell.innerText = cell.data;
+          }
+        }
+      }
+
       cell.classList.add('cell');
       cell.innerText = col;
       rowGroup.appendChild(cell);
